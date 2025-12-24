@@ -15,14 +15,25 @@
 
 /// <reference types="cypress" />
 
-Cypress.Commands.add('acessHomePageLogin', () => {
+const locators_home = {
+    login: {
+        user: '[data-test="email"]',
+        password: '[data-test="passwd"]',
+        btn: '.btn'
+    },
+    messageLogin: '.toast-message'
+}
+
+Cypress.Commands.add('acessHomePageLogin', () => { //Acessando a tela de login
     cy.visit('/')
         .get('.navbar')
-        
-    cy.get('[data-test="email"]').type('27@teste.com')
-    cy.get('[data-test="passwd"]').type('2727')
-    cy.get('.btn').click()
-    cy.get('.toast-message').should('contain','Bem vindo')
+})
+
+Cypress.Commands.add('LogandoApp', () => { //Realizando login no aplicativo
+    cy.get(locators_home.login.user).type('27@teste.com')
+    cy.get(locators_home.login.password).type('2727')
+    cy.get(locators_home.login.btn).click()
+    cy.get(locators_home.messageLogin).should('contain','Bem vindo')
 })
 
 
