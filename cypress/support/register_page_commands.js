@@ -9,6 +9,7 @@ const locators_register = {
         account: '[href="/contas"]',
         reset:'[href="/reset"]',
         movement: '[data-test="menu-movimentacao"]',
+        extract: '[data-test="menu-extrato"]'
     },
     account: {
         nameAccount: '[data-test="nome"]',
@@ -24,7 +25,8 @@ const locators_register = {
         btnSaveMovement: '.btn-primary'
     },
     extract: {
-        linesLength: '.list-group > li'
+        linesLength: '.list-group > li',
+        fn_xp_remove_element: conta => `//span[contains(., '${conta}')]/../..//i[@class='far fa-trash-alt']`
     },
     balance:{
         fn_xp_balance_account: nome => `//td[contains(., '${nome}')]/../td[2]` // Função para buscar o saldo da conta pelo nome
@@ -111,3 +113,10 @@ Cypress.Commands.add('getBalanceAccount', (balanceAccount) => { //Buscando o sal
         .should('contain.text', '100,00')
 })
 
+Cypress.Commands.add('acessExtract', () => { //Acessando a tela de extrato
+    cy.get(locators_register.menu.extract).click()
+})
+
+Cypress.Commands.add('removeMovement', (conta) => { //Removendo uma movimentação
+    cy.xpath(locators_register.extract.fn_xp_remove_element(conta)).click()
+})

@@ -19,7 +19,7 @@ describe('Functional Level', () => {
         cy.message('Conta inserida com sucesso!')
     })
 
-    it.only('Should edit an account', () => { //Deve alterar/editar uma conta existente
+    it('Should edit an account', () => { //Deve alterar/editar uma conta existente
         cy.menuSettings()
         cy.accountOption()
         cy.inputAccountName('Conta alterada')
@@ -72,5 +72,24 @@ describe('Functional Level', () => {
         cy.acessHome()
         cy.getBalanceAccount('Conta alterada')
    })
-    
+
+   it('Should remove a transaction', () => { //Deve remover uma movimentação
+        cy.menuSettings()
+        cy.accountOption()
+        cy.inputAccountName('Conta alterada')
+        cy.btnSaveAccount()
+        cy.message('Conta inserida com sucesso!')
+        cy.createMovement()
+        cy.inputMovementDetails('teste 1', '100', 'Interessado teste')
+        cy.selectAccount('Conta alterada')
+        cy.btnStatus()
+        cy.btnSaveMovement()
+        cy.message('Movimentação inserida com sucesso!') // 1° validação
+        cy.linesLength() // 2° validação 
+        cy.acessHome()
+        cy.acessExtract()
+        cy.removeMovement('teste 1')
+        cy.message('Movimentação removida com sucesso!')
+    })
+
 })
