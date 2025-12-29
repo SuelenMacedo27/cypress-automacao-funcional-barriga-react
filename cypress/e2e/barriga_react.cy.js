@@ -11,7 +11,7 @@ describe('Functional Level', () => {
         cy.resetApp()
     })
     
-    it('Should create an account', () => { //Deve criar uma conta
+    it('Should create an account', () => { //Deve criar/inserir uma conta
         cy.menuSettings()
         cy.accountOption()
         cy.inputAccountName('Conta alterada')
@@ -30,7 +30,7 @@ describe('Functional Level', () => {
         cy.message('Conta atualizada com sucesso!')
     })    
 
-    it('Should not create an account with same name', () => { //Não deve criar uma conta com o mesmo nome
+    it('Should not create an account with same name', () => { //Não deve criar uma conta com o mesmo nome (inserindo conta repetida)
         cy.menuSettings()
         cy.accountOption()
         cy.inputAccountName('Conta alterada')
@@ -41,7 +41,7 @@ describe('Functional Level', () => {
         cy.message('Erro: Error: Request failed with status code 400')
     })
 
-   it('Should create a transaction', () => { //Deve criar uma movimentação, transação
+   it('Should create a transaction', () => { //Deve criar/inserir uma movimentação, transação
         cy.menuSettings()
         cy.accountOption()
         cy.inputAccountName('Conta alterada')
